@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 import dotenv from 'dotenv'
+import bodyParser from 'body-parser'
 
 dotenv.config()
 export default {
@@ -35,6 +36,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
@@ -100,11 +102,19 @@ export default {
     },
   },
   privateRuntimeConfig: {
+    privateKey: process.env.PRIVATE_KEY,
     google: {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
   },
   router: {
-    middleware: ['auth']
+    // middleware: ['auth'] // TODO
   },
+  serverMiddleware: [
+    bodyParser.json(),
+    {
+      path: '/api/sheets',
+      handler: '~/server-middleware/sheets'
+    }
+  ],
 }

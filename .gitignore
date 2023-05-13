@@ -91,3 +91,4 @@ sw.*
 .vercel
 
 .memo
+.service_account.json
