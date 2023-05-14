@@ -114,7 +114,7 @@ export default {
     bodyParser.json(),
     {
       path: '/api/sheets',
-      handler: '~/server-middleware/sheets'
+      handler: '~/api/sheets'
     }
   ],
 }
