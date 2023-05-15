@@ -31,6 +31,10 @@ export default defineComponent({
       updateData: [] as Category[]
     }
   },
+  mounted: function () {
+    // deepコピー
+    this.updateData = JSON.parse(JSON.stringify(this.categories))
+  },
   computed: {
     ...mapGetters(['getCategories']),
     categories() {
@@ -50,6 +54,7 @@ export default defineComponent({
       return 0
     },
     setRating(categoryIndex, questionIndex, rating) {
+      // 存在しないcategory, questionが指定されることはない
       const category = this.updateData.find(item => item.categoryIndex === categoryIndex)
       if (category) {
         const question = category.questions.find(q => q.questionIndex === questionIndex)
@@ -59,8 +64,7 @@ export default defineComponent({
       }
     },
     submit() {
-      this.updateMultipleRatings([{categoryIndex: 1, questionIndex: 1, rating: 1}])
-      // this.updateCategoryRating(this.updateData)
+      this.updateMultipleRatings(this.updateData)
       this.$router.push('/results')
     }
   }

@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { mapState } from 'vuex'
-import { defineComponent, useStore } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 import RadarChart from '../components/RadarChart.vue'
 import { Category, Question } from '../types/survey'
 
@@ -33,7 +33,7 @@ export default defineComponent({
         labels,
         datasets: [
           {
-            label: 'Results',
+            label: 'モテレベル',
             data,
             backgroundColor: 'rgba(179,181,198,0.2)',
             borderColor: 'rgba(179,181,198,1)',
