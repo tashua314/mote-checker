@@ -19,6 +19,7 @@
     "@nuxtjs/composition-api": "^0.33.1",
     "@vue/composition-api": "^1.7.1",
     "chart.js": "^3.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "core-js": "^3.25.3",
     "dotenv": "^16.0.3",
     "googleapis": "^118.0.0",

@@ -27,13 +27,15 @@ import {
   LineElement,
   RadialLinearScale
 } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 ChartJS.register(
   Title,
   Tooltip,
   Legend,
   PointElement,
   RadialLinearScale,
-  LineElement
+  LineElement,
+  ChartDataLabels
 )
 
 export default defineComponent({
@@ -68,6 +70,19 @@ export default defineComponent({
               },
             },
           },
+          datalabels: { // データラベル
+            display: true,
+            color: 'black',
+            font: {
+              size: 20,
+            },
+            formatter: (value, context) => {
+              return value.toFixed(1)
+            },
+            anchor: 'end',
+            align: 'end',
+            offset: 10,
+          }
         },
         responsive: true,
         maintainAspectRatio: false

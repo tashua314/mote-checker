@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-form ref="form">
+    <AnalysisInProgress v-if="loading" />
+    <v-form ref="form" v-else>
       <div v-for="(category, categoryIndex) in categories" :key="categoryIndex">
-        <v-subheader>{{ category.name }}</v-subheader>
         <div v-for="(question, questionIndex) in category.questions" :key="questionIndex">
           <v-slider
             :value="getRating(categoryIndex, questionIndex)"
@@ -23,12 +23,17 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import { mapGetters, mapMutations } from 'vuex'
 import { Category } from '../types/survey'
+import AnalysisInProgress from '../components/AnalysisInProgress.vue'
 
 export default defineComponent({
   name: 'survey',
+  components: {
+    AnalysisInProgress
+  },
   data() {
     return {
-      updateData: [] as Category[]
+      updateData: [] as Category[],
+      loading: false
     }
   },
   mounted: function () {
@@ -64,8 +69,11 @@ export default defineComponent({
       }
     },
     submit() {
+      this.loading = true
       this.updateMultipleRatings(this.updateData)
-      this.$router.push('/results')
+      setTimeout(() => {
+        this.$router.push('/results'); // 3秒後にresultsページにリダイレクト
+      }, 3000);
     }
   }
 })
