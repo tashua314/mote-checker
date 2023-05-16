@@ -35,12 +35,13 @@ export default defineComponent({
           {
             label: 'モテレベル',
             data,
-            backgroundColor: 'rgba(179,181,198,0.2)',
-            borderColor: 'rgba(179,181,198,1)',
-            pointBackgroundColor: 'rgba(179,181,198,1)',
+            fill: true,
+            backgroundColor: 'rgba(233, 30, 99, 0.2)',
+            borderColor: 'rgba(233, 30, 99, 1)',
+            pointBackgroundColor: 'rgba(233, 30, 99, 1)',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(179,181,198,1)',
+            pointHoverBorderColor: 'rgba(233, 30, 99, 1)',
           },
         ],
       }

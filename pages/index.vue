@@ -1,19 +1,78 @@
 <template>
-  <div>
-    <h1>Favorite Food</h1>
-    <div v-if="true /*$auth.loggedIn*/">
-      <p>Welcome, {{ /* $auth.user.name */ }}</p>
-      <form @submit.prevent="submitForm">
-        <label for="favoriteFood">Favorite Food:</label>
-        <v-text-field id="favoriteFood" v-model="favoriteFood" required class="white--text"></v-text-field>
-        <v-btn type="submit">Submit</v-btn>
-      </form>
-    </div>
-    <div v-else>
-      <p>Please <nuxt-link to="/login">login</nuxt-link> to continue.</p>
-      <button @click="loginWithGoogle">Login with Google2</button>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <h1>この度はメタバースEXPOよりご覧いただきありがとうございます❣</h1>
+        <p>エンジニア恋愛コンサルタントとして活動しておりますゆーちゃんです😆</p>
+        <p>私からはプレゼントを２つお送りさせていただきます。</p>
+      </v-col>
+
+      <!-- プレゼント１ -->
+      <v-col cols="12">
+        <v-card>
+          <v-img :src="present1Image"></v-img>
+          <v-card-title>5/20 開催「１Day恋愛セミナー」招待券</v-card-title>
+          <v-card-text>※限定３名様（抽選）</v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" :href="present1URL">詳細はこちら</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+
+      <!-- プレゼント２ -->
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>モテチェッカー利用券</v-card-title>
+          <v-card-text>
+            現在鋭意開発中のモテチェッカーを無料でご利用いただけます！<br>
+            下記より、ぜひお使いください＾＾<br>
+          </v-card-text>
+          <v-card-actions>
+            <nuxt-link to="/survey">
+              <v-btn color="primary" large>
+                モテチェッカーを始める
+              </v-btn>
+            </nuxt-link>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+
+      <!-- プロフィール -->
+      <v-col cols="12">
+        <v-card>
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-img :src="profileImage" max-width="100%"></v-img>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-card-title>ゆーちゃん /<br>TechGuide合同会社　代表<br>エンジニア恋愛コンサルタント</v-card-title>
+              <v-card-text>
+                11年間webエンジニアとして従事<br>
+                3回転職・個人でも案件を不定期に受注<br>
+                2021年にTechGuide合同会社を設立<br>
+                遠距離恋愛失敗×3<br>
+                何考えてるかわからないと振られる<br>
+                音信不通自然消滅<br>
+                コミュ障エンジニアが笑顔の絶えない結婚生活＆社長生活に<br>
+                <br>
+                エンジニア向け：エンジニア恋愛コンサル・コミュニケーション教育<br>
+                企業向け：エンジニア採用支援・ITサポート<br>
+                定期開催：月数回異業種交流会・オンラインセミナーを企画<br>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn icon href="https://twitter.com/tashua314" target="_blank">
+                  <v-icon>mdi-twitter</v-icon>
+                </v-btn>
+                <v-btn icon href="https://www.instagram.com/love_and_tech/" target="_blank">
+                  <v-icon>mdi-instagram</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -22,59 +81,15 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   data() {
     return {
-      favoriteFood: ''
+      present1Image: '/path/to/present1.jpg',  // プレゼント１の画像へのパス
+      present1URL: 'https://example.com',  // プレゼント１の詳細ページへのURL
+      profileImage: require('~/assets/profile.png')
+      // プロフィール画像へのパス
     }
   },
-  methods: {
-    async loginWithGoogle() {
-      try {
-        // await this.$auth.loginWith('google');
-      } catch (error) {
-        console.error('Error logging in with Google:', error);
-      }
-    },
-    /**
-     * フォームを送信する
-     */
-    async submitForm() {
-      const dateTime = new Date().toISOString()
-      const userEmail = 'sample@sample.com' //this.$auth.user.email
-      const userName = 'sample name' //this.$auth.user.name
-
-      try {
-        await this.writeToSheet(dateTime, userEmail, userName, this.favoriteFood)
-        this.$router.push('/success')
-      } catch (error) {
-        console.error('Failed to write to sheet:', error)
-      }
-    },
-    /**
-     * 
-     * @param {*} dateTime 
-     * @param {*} userEmail 
-     * @param {*} userName 
-     * @param {*} favoriteFood 
-     */
-    async writeToSheet(dateTime: string, userEmail: string, userName: string, favoriteFood: string) {
-      const accessToken = 'sample token' //this.$auth.strategy.token.get()
-
-      const url = '/api/sheets'
-      // const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.YOUR_SPREADSHEET_ID}/values/シート1!A:D:append?valueInputOption=RAW`
-      const requestBody = {
-        values: [dateTime, userEmail, userName, favoriteFood]
-      }
-      const headers = {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      }
-
-      try {
-        await this.$axios.$post(url, requestBody, { headers })
-      } catch (error) {
-        console.error('Failed to write to sheet:', error)
-        throw error
-      }
-    }
-  }
 })
 </script>
+
+<style scoped>
+/* ここで必要なCSSを追加できます */
+</style>

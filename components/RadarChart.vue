@@ -51,10 +51,12 @@ export default defineComponent({
             max: 5, // 最大値
             pointLabels: { // 軸ラベル
               font: {
-                size: 30,
+                size: 15,
+                weight: 'bold',
               },
             },
             ticks: { // 目盛り
+              display: false,
               stepSize: 1, // 目盛りの間隔
               font: {
                 size: 15,
@@ -72,6 +74,7 @@ export default defineComponent({
           },
           datalabels: { // データラベル
             display: true,
+            clip: true,
             color: 'black',
             font: {
               size: 20,

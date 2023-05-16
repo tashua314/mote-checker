@@ -38,8 +38,13 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'モテレベルチェッカー💕V1',
     }
   },
 }
 </script>
+<style>
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #f36ae5 100%);
+}
+</style>

@@ -16,7 +16,7 @@ export const state: RootState = {
       ],
     },
     {
-      name: 'コミュニケーション能力',
+      name: "コミュ力",
       categoryIndex: 1,
       questions: [
         { questionIndex: 0, text: 'メッセージでの会話は自然で楽しかったと感じましたか？', rating: 0 },

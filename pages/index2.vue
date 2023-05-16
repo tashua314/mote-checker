@@ -1,87 +1,80 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <h1>Favorite Food</h1>
+    <div v-if="true /*$auth.loggedIn*/">
+      <p>Welcome, {{ /* $auth.user.name */ }}</p>
+      <form @submit.prevent="submitForm">
+        <label for="favoriteFood">Favorite Food:</label>
+        <v-text-field id="favoriteFood" v-model="favoriteFood" required class="white--text"></v-text-field>
+        <v-btn type="submit">Submit</v-btn>
+      </form>
+    </div>
+    <div v-else>
+      <p>Please <nuxt-link to="/login">login</nuxt-link> to continue.</p>
+      <button @click="loginWithGoogle">Login with Google2</button>
+    </div>
+  </div>
 </template>
 
-<script>
-export default {
-  name: 'IndexPage',
-}
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  data() {
+    return {
+      favoriteFood: ''
+    }
+  },
+  methods: {
+    async loginWithGoogle() {
+      try {
+        // await this.$auth.loginWith('google');
+      } catch (error) {
+        console.error('Error logging in with Google:', error);
+      }
+    },
+    /**
+     * フォームを送信する
+     */
+    async submitForm() {
+      const dateTime = new Date().toISOString()
+      const userEmail = 'sample@sample.com' //this.$auth.user.email
+      const userName = 'sample name' //this.$auth.user.name
+
+      try {
+        await this.writeToSheet(dateTime, userEmail, userName, this.favoriteFood)
+        this.$router.push('/success')
+      } catch (error) {
+        console.error('Failed to write to sheet:', error)
+      }
+    },
+    /**
+     * 
+     * @param {*} dateTime 
+     * @param {*} userEmail 
+     * @param {*} userName 
+     * @param {*} favoriteFood 
+     */
+    async writeToSheet(dateTime: string, userEmail: string, userName: string, favoriteFood: string) {
+      const accessToken = 'sample token' //this.$auth.strategy.token.get()
+
+      const url = '/api/sheets'
+      // const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.YOUR_SPREADSHEET_ID}/values/シート1!A:D:append?valueInputOption=RAW`
+      const requestBody = {
+        values: [dateTime, userEmail, userName, favoriteFood]
+      }
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+
+      try {
+        await this.$axios.$post(url, requestBody, { headers })
+      } catch (error) {
+        console.error('Failed to write to sheet:', error)
+        throw error
+      }
+    }
+  }
+})
 </script>

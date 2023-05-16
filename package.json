@@ -14,6 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@mdi/font": "^7.2.96",
     "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.33.1",
@@ -24,6 +25,7 @@
     "dotenv": "^16.0.3",
     "googleapis": "^118.0.0",
     "install": "^0.13.0",
+    "material-design-icons-iconfont": "^6.7.0",
     "nuxt": "^2.15.8",
     "nuxt-property-decorator": "^2.9.1",
     "pug": "^3.0.2",
