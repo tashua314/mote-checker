@@ -4,14 +4,20 @@
     <v-form ref="form" v-else>
       <div v-for="(category, categoryIndex) in categories" :key="categoryIndex">
         <div v-for="(question, questionIndex) in category.questions" :key="questionIndex">
-          <v-slider
-            :value="getRating(categoryIndex, questionIndex)"
-            @input="setRating(categoryIndex, questionIndex, $event)"
-            :label="question.text"
-            min="1"
-            max="5"
-            thumb-label="always"
-          ></v-slider>
+          <v-row>
+            <v-col cols="12">
+              <p>{{ question.text }}</p>
+            </v-col>
+            <v-col cols="12">
+              <v-slider
+                :value="getRating(categoryIndex, questionIndex)"
+                @input="setRating(categoryIndex, questionIndex, $event)"
+                min="1"
+                max="5"
+                thumb-label="always"
+              ></v-slider>
+            </v-col>
+          </v-row>
         </div>
       </div>
       <v-btn color="primary" @click="submit">回答する</v-btn>

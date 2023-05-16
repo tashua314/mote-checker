@@ -10,9 +10,9 @@
       <!-- プレゼント１ -->
       <v-col cols="12">
         <v-card>
-          <v-img :src="present1Image"></v-img>
           <v-card-title>5/20 開催「１Day恋愛セミナー」招待券</v-card-title>
-          <v-card-text>※限定３名様（抽選）</v-card-text>
+          <v-card-text>※限定３名様（先着）</v-card-text>
+          <v-img :src="present1Image"></v-img>
           <v-card-actions>
             <v-btn color="primary" :href="present1URL">詳細はこちら</v-btn>
           </v-card-actions>
@@ -81,9 +81,9 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   data() {
     return {
-      present1Image: '/path/to/present1.jpg',  // プレゼント１の画像へのパス
+      present1Image: require('~/assets/event.jpg'),  // プレゼント１の画像へのパス
       present1URL: 'https://example.com',  // プレゼント１の詳細ページへのURL
-      profileImage: require('~/assets/profile.png')
+      profileImage: require('~/assets/profile.jpg')
       // プロフィール画像へのパス
     }
   },

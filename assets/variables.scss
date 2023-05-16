@@ -2,3 +2,12 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+body {
+  /* 標準の記述 */
+  background: linear-gradient(135deg, #f5f7fa 0%, #f36ae5 100%);
+  /* Webkitブラウザ（Chrome、Safariなど）用 */
+  background: -webkit-linear-gradient(135deg, #f5f7fa 0%, #f36ae5 100%);
+  /* Firefox用 */
+  background: -moz-linear-gradient(135deg, #f5f7fa 0%, #f36ae5 100%);
+}
