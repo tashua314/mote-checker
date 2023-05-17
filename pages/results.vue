@@ -16,7 +16,7 @@
         </v-col>
       <v-col cols="12">
         <v-card>
-          <v-card-title>結果</v-card-title>
+          <v-card-title>総合：{{ this.totalScore }}点</v-card-title>
           <v-card-text>
             <radar-chart :chartData="chartData"></radar-chart>
             <!-- シェアURLをコピーするボタン -->
@@ -31,13 +31,13 @@
       <v-col cols="12">
         <v-card>
           <v-card-text>
-            結果はいかがでしたか？<br>
-            今後の恋愛に役立てていただければ幸いです😊<br>
+            結果はいかがでしたでしょうか？<br><br>
+            {{this.checkee}}さんにシェアいただき、今後の恋愛に役立てていただければ幸いです😊<br>
             <br>
             また、こちらのモテチェッカーは3カテゴリーのみのチェックとなっております。<br>
             より詳しく（6カテゴリーで）チェックしたい方、<br>
             身近にチェックしてくれる人がいない方は、<br>
-            ぜひ下記のLINE公式アカウントをご利用ください♫😊<br>
+            ぜひ下記のLINE公式アカウントからご連絡ください♫😊<br>
         </v-card-text>
           <v-card-actions class="justify-center">
             <a :href="officialLineURL"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="56" border="0"></a>
@@ -72,6 +72,15 @@ export default defineComponent({
       checker: state => state.checker,
       checkee: state => state.checkee,
     }),
+    // 最大値の場合を100点として、モテレベルを算出
+    totalScore() {
+      if (this.averageScores.length > 0) {
+        const val = 100 * this.averageScores.reduce((a: number, b: number) => a + b) / (this.averageScores.length * 5)
+        return Math.round(val)
+      } else {
+        return ''
+      }
+    },
     // TODO: mapGettersがなぜか動かない
     // ...mapGetters(['getChecker, getCheckee', 'getCategories']),
     // checker() {
