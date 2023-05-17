@@ -45,7 +45,11 @@ export default {
     '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/google-gtag'
   ],
+  'google-gtag': {
+    id: 'G-Y2FV2RC5MK',
+  }
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
