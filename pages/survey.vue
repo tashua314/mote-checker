@@ -2,6 +2,21 @@
   <v-container>
     <AnalysisInProgress v-if="loading" />
     <v-form ref="form" v-else>
+      <v-card class="mx-auto mb-5" color="pink lighten-5">
+        <v-card-title class="font-weight-bold">
+          モテレベルをチェックしよう！
+        </v-card-title>
+        <v-card-subtitle>
+          {{ $route.query.checker }}さんが{{ $route.query.checkee }}さんをチェックします！<br>
+          以下の質問に答えてください😊
+        </v-card-subtitle>
+        <v-card-text>
+          <p class="mb-1">チェックする人</p>
+          <p class="headline mb-4">{{ $route.query.checker }}</p>
+          <p class="mb-1">チェックされる人</p>
+          <p class="headline mb-4">{{ $route.query.checkee }}</p>
+        </v-card-text>
+      </v-card>
       <div v-for="(category, categoryIndex) in categories" :key="categoryIndex">
         <div v-for="(question, questionIndex) in category.questions" :key="questionIndex">
           <v-row>

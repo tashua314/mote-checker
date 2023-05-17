@@ -10,7 +10,7 @@
       <!-- プレゼント１ -->
       <v-col cols="12">
         <v-card>
-          <v-card-title>5/20 開催「１Day恋愛セミナー」招待券</v-card-title>
+          <v-card-title>＜プレゼント１＞<br>5/20 開催「１Day恋愛セミナー」招待券</v-card-title>
           <v-card-text>※限定３名様（先着）</v-card-text>
           <v-img :src="present1Image"></v-img>
           <v-card-actions>
@@ -22,17 +22,27 @@
       <!-- プレゼント２ -->
       <v-col cols="12">
         <v-card>
-          <v-card-title>モテチェッカー利用券</v-card-title>
+          <v-card-title>＜プレゼント２＞<br>モテチェッカー利用券</v-card-title>
           <v-card-text>
             現在鋭意開発中のモテチェッカーを無料でご利用いただけます！<br>
             下記より、ぜひお使いください＾＾<br>
           </v-card-text>
+          <v-text-field v-model="checker" label="チェックする人"></v-text-field>
+          <v-text-field v-model="checkee" label="チェックされる人"></v-text-field>
           <v-card-actions>
-            <nuxt-link to="/survey">
+            <nuxt-link :to="{ path: '/survey', query: { checker, checkee } }">
               <v-btn color="primary" large>
                 モテチェッカーを始める
               </v-btn>
             </nuxt-link>
+          </v-card-actions>
+          <v-card-text>
+            もしくは
+          </v-card-text>
+          <v-card-actions>
+            <v-btn @click="copySurveyURL" color="primary">
+              チェックを依頼する
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -83,10 +93,25 @@ export default defineComponent({
     return {
       present1Image: require('~/assets/event.jpg'),  // プレゼント１の画像へのパス
       present1URL: 'https://example.com',  // プレゼント１の詳細ページへのURL
-      profileImage: require('~/assets/profile.jpg')
-      // プロフィール画像へのパス
+      profileImage: require('~/assets/profile.jpg'), // プロフィール画像へのパス
+      checker: '', // チェックする人
+      checkee: '', // チェックされる人
     }
   },
+  methods: {
+    // surveyページのシェア（コピー）ボタンを押したときの処理
+    copySurveyURL() {
+      const link = `${location.origin}/survey?checker=${this.checker}&checkee=${this.checkee}`
+      const message = `${this.checker}さん、こんにちは！\n以下のリンクからモテチェッカーにアクセスして、${this.checkee}さんのモテレベルをチェックしてみてください😊\n${link}`;
+      navigator.clipboard.writeText(message).then(() => {
+        // 成功した場合の処理
+        this.$toasted.success('リンクをコピーしました！<br>' + this.checker + 'さんにシェアしてみましょう😊');
+      }, () => {
+        // 失敗した場合の処理
+        this.$toasted.error('リンクのコピーに失敗しました。<br>「モテチェッカーを始める」ボタンを押して、URLをコピーしてください。');
+      });
+    }
+  }
 })
 </script>
 

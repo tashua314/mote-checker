@@ -31,7 +31,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/composition-api.js'
+    '~/plugins/composition-api.js',
+    '~/plugins/vue-toasted.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
