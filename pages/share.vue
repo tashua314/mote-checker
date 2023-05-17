@@ -19,10 +19,6 @@
           <v-card-title>結果</v-card-title>
           <v-card-text>
             <radar-chart :chartData="chartData"></radar-chart>
-            <!-- シェアURLをコピーするボタン -->
-            <v-btn @click="copyShareURL" color="primary">
-              結果をシェアする
-            </v-btn>
         </v-card-text>
         </v-card>
       </v-col>
@@ -49,10 +45,10 @@
 </template>
 
 <script lang="ts">
-import { mapState, mapGetters } from 'vuex'
 import { defineComponent } from '@nuxtjs/composition-api'
+import { mapState } from 'vuex'
 import RadarChart from '../components/RadarChart.vue'
-import { Category, Question } from '../types/survey'
+import { Category } from '../types/survey'
 
 export default defineComponent({
   components: {
@@ -62,27 +58,24 @@ export default defineComponent({
     return {
       officialLineURL: 'https://bit.ly/3LrZHea',
       shareURL: '',
-      averageScores: [],
       labels: [],
     }
   },
   computed: {
-    ...mapState({
-      categories: state => state.categories,
-      checker: state => state.checker,
-      checkee: state => state.checkee,
-    }),
-    // TODO: mapGettersがなぜか動かない
-    // ...mapGetters(['getChecker, getCheckee', 'getCategories']),
-    // checker() {
-    //   return this.getChecker
-    // },
-    // checkee() {
-    //   return this.getCheckee
-    // },
-    // categories() {
-    //   return this.getCategories
-    // },
+    ...mapState(['categories']),
+    categories() {
+      return this.$store.state.categories
+    },
+    checker() {
+      // リクエストパラメータから取得
+      return this.$route.query.checker as string
+    },
+    checkee() {
+      return this.$route.query.checkee as string
+    },
+    averageScores() {
+      return this.$route.query.scores.split(',').map((score: string) => Number(score))
+    },
     chartData() {
       return {
         labels: this.labels,
@@ -104,22 +97,6 @@ export default defineComponent({
   },
   mounted() {
     this.labels = this.categories.map((category: Category) => category.name)
-    this.averageScores = this.categories.map((category: Category) =>
-      category.questions.reduce((total: number, question: Question) => total + question.rating, 0) / category.questions.length
-    )
-    this.shareURL = `${window.location.origin}/share?checker=${this.checker}&checkee=${this.checkee}&scores=${this.averageScores.join(',')}`
-  },
-  methods: {
-    copyShareURL() {
-      const message = `${this.checkee}さん、こんにちは！\nチェックしてみたので確認してみてくださいね😊\n${this.shareURL}`;
-      navigator.clipboard.writeText(message).then(() => {
-        // 成功した場合の処理
-        this.$toasted.success('リンクをコピーしました！<br>' + this.checkee + 'さんに結果をシェアしましょう😊');
-      }, () => {
-        // 失敗した場合の処理
-        this.$toasted.error('リンクのコピーに失敗しました。<br>再度お試しください。');
-      });
-    },
   },
 })
 </script>

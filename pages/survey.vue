@@ -60,6 +60,8 @@ export default defineComponent({
   mounted: function () {
     // deepコピー
     this.updateData = JSON.parse(JSON.stringify(this.categories))
+    this.updateChecker(this.$route.query.checker)
+    this.updateCheckee(this.$route.query.checkee)
   },
   computed: {
     ...mapGetters(['getCategories']),
@@ -68,7 +70,7 @@ export default defineComponent({
     }
   },
   methods: {
-    ...mapMutations(['updateMultipleRatings']),
+    ...mapMutations(['updateMultipleRatings', 'updateChecker', 'updateCheckee']),
     getRating(categoryIndex, questionIndex) {
       const category = this.updateData.find(item => item.categoryIndex === categoryIndex)
       if (category) {

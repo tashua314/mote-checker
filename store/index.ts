@@ -41,10 +41,14 @@ export const state: RootState = {
       ],
     },
   ],
+  checker: '',
+  checkee: '',
 }
 
 interface RootState {
-  categories: Category[]
+  categories: Category[],
+  checker: string,
+  checkee: string,
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -56,10 +60,18 @@ export const mutations: MutationTree<RootState> = {
   updateMultipleRatings(state, payload: Category[]) {
     state.categories = payload
   },
+  updateChecker(state, payload: string) {
+    state.checker = payload
+  },
+  updateCheckee(state, payload: string) {
+    state.checkee = payload
+  }
 }
 
 export const getters: GetterTree<RootState, RootState> = {
   getCategories: (state) => state.categories,
+  getChecker: (state) => state.checker,
+  getCheckee: (state) => state.checkee,
 }
 
 export const actions: ActionTree<RootState, RootState> = {
