@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import { defineComponent } from '@nuxtjs/composition-api'
 import RadarChart from '../components/RadarChart.vue'
 import { Category, Question } from '../types/survey'
@@ -108,6 +108,7 @@ export default defineComponent({
       category.questions.reduce((total: number, question: Question) => total + question.rating, 0) / category.questions.length
     )
     this.shareURL = `${window.location.origin}/share?checker=${this.checker}&checkee=${this.checkee}&scores=${this.averageScores.join(',')}`
+    this.writeToSheet()
   },
   methods: {
     copyShareURL() {
@@ -120,6 +121,28 @@ export default defineComponent({
         this.$toasted.error('リンクのコピーに失敗しました。<br>再度お試しください。');
       });
     },
+    async writeToSheet() {
+      const dateTime = new Date().toISOString()
+      const accessToken = 'sample token' //this.$auth.strategy.token.get()
+
+      const url = '/api/sheets'
+      // const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.YOUR_SPREADSHEET_ID}/values/シート1!A:D:append?valueInputOption=RAW`
+      const requestBody = {
+        // averageScoresの配列を結合する
+        values: [dateTime, this.checker, this.checkee].concat(this.averageScores)
+      }
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+
+      try {
+        await this.$axios.$post(url, requestBody, { headers })
+      } catch (error) {
+        console.error('Failed to write to sheet:', error)
+        throw error
+      }
+    }
   },
 })
 </script>
