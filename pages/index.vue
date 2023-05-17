@@ -27,7 +27,7 @@
             現在鋭意開発中のモテチェッカーを無料でご利用いただけます！<br>
             下記より、ぜひお使いください＾＾<br>
           </v-card-text>
-          <v-text-field v-model="checker" label="チェックする人"></v-text-field>
+          <v-text-field v-model="checker" label="チェックを依頼したい人"></v-text-field>
           <v-text-field v-model="checkee" label="チェックされる人"></v-text-field>
           <v-card-actions>
             <nuxt-link :to="{ path: '/survey', query: { checker, checkee } }">
