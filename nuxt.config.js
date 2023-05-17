@@ -49,7 +49,7 @@ export default {
   ],
   'google-gtag': {
     id: 'G-Y2FV2RC5MK',
-  }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
