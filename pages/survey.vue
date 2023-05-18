@@ -48,6 +48,16 @@ import AnalysisInProgress from '../components/AnalysisInProgress.vue'
 
 export default defineComponent({
   name: 'survey',
+  head: {
+    title: 'モテチェッカー - チェックする',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'モテチェッカーです。お相手の方のモテレベルをチェックしてあげましょう！'
+      }
+    ]
+  },
   components: {
     AnalysisInProgress
   },

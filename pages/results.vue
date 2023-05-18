@@ -55,6 +55,16 @@ import RadarChart from '../components/RadarChart.vue'
 import { Category, Question } from '../types/survey'
 
 export default defineComponent({
+  head: {
+    title: 'モテチェッカー - チェック結果',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'モテチェックの結果です'
+      }
+    ]
+  },
   components: {
     RadarChart,
   },

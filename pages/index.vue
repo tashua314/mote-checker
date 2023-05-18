@@ -95,6 +95,16 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  head: {
+    title: 'メタバースEXPOプレゼント',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'メタバースEXPOプレゼント'
+      }
+    ]
+  },
   data() {
     return {
       present1Image: require('~/assets/event.jpg'),  // プレゼント１の画像へのパス
