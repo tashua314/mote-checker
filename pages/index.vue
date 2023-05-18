@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h1>この度はメタバースEXPOよりご覧いただきありがとうございます❣</h1>
+        <h1>この度はご覧いただきありがとうございます❣</h1>
         <p>エンジニア恋愛コンサルタントとして活動しておりますゆーちゃんです😆</p>
         <p>私からはプレゼントを２つお送りさせていただきます。</p>
       </v-col>
@@ -96,12 +96,12 @@ import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   head: {
-    title: 'メタバースEXPOプレゼント',
+    title: 'メタバースEXPO出展記念プレゼント',
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: 'メタバースEXPOプレゼント'
+        content: 'メタバースEXPO出展記念プレゼント'
       }
     ]
   },
