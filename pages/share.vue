@@ -58,7 +58,7 @@ import { Category } from '../types/survey'
 
 export default defineComponent({
   head: {
-    title: 'モテチェッカー - チェック結果',
+    title: 'モテチェッカー - 結果シェア',
     meta: [
       {
         hid: 'description',
