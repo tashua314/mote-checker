@@ -10,18 +10,16 @@
       <!-- プレゼント１ -->
       <v-col cols="12">
         <v-card>
-          <v-card-title>＜プレゼント１＞<br>5/20 開催「１Day恋愛セミナー」招待券</v-card-title>
+          <v-card-title>＜プレゼント１＞<br>5/22 開催「zoom話し方セミナー」招待券</v-card-title>
           <v-card-text>
-            限定２名様（抽選）に限り、<br>
-            セミナー料金を全額キャッシュバックさせていただきます！<br>
-            以下のフォームより、キーワードに<br>
-            <strong>「メタバースLOVE」</strong>とご記入いただき、<br>
-            ご応募ください🌟
           </v-card-text>
           <v-card-actions class="d-flex justify-center">
             <v-btn color="primary" :href="present1URL" target="_blank" large>詳細はこちら</v-btn>
           </v-card-actions>
-          <v-img :src="present1Image"></v-img>
+          <!-- 画像リンク -->
+          <nuxt-link :to="{ path: present1URL }">
+            <v-img :src="present1Image"></v-img>
+          </nuxt-link>
         </v-card>
       </v-col>
 
@@ -134,7 +132,7 @@ export default defineComponent({
   data() {
     return {
       present1Image: require('~/assets/event.jpg'),  // プレゼント１の画像へのパス
-      present1URL: 'https://bit.ly/3W9Sjc6',  // プレゼント１の詳細ページへのURL
+      present1URL: 'https://bit.ly/3BGz7tn',  // プレゼント１の詳細ページへのURL
       profileImage: require('~/assets/profile.jpg'), // プロフィール画像へのパス
       checker: '', // チェックする人
       checkee: '', // チェックされる人
