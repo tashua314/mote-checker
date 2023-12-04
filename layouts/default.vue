@@ -10,7 +10,9 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>恋愛研究会 TechGuide LLC.&copy; {{ new Date().getFullYear() }}</span>
+      <v-layout justify-center>
+        <span>恋愛研究会 TechGuide LLC.&copy; {{ new Date().getFullYear() }}</span>
+      </v-layout>
     </v-footer>
   </v-app>
 </template>
@@ -38,7 +40,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'モテレベルチェッカー💕V1',
+      title: 'Mote-Checker',
     }
   },
 }
@@ -46,5 +48,10 @@ export default {
 <style>
 body {
   background: linear-gradient(135deg, #f5f7fa 0%, #f36ae5 100%);
+}
+header {
+  font-style: italic;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
 }
 </style>
