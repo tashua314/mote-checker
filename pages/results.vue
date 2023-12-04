@@ -4,13 +4,10 @@
         <v-col cols="12">
           <v-card class="mx-auto mb-5" color="pink lighten-5">
             <v-card-title class="font-weight-bold">
-              モテレベルをチェック結果です💕
+              モテレベルチェック結果⭐
             </v-card-title>
             <v-card-text>
-              <p class="mb-1">チェックした人</p>
-              <p class="headline mb-4">{{ this.checker }}</p>
-              <p class="mb-1">チェックされた人</p>
-              <p class="headline mb-4">{{ this.checkee }}</p>
+              <p class="headline mb-4">{{ this.checkee }}さんのチェック結果</p>
             </v-card-text>
           </v-card>
         </v-col>
@@ -32,12 +29,10 @@
         <v-card>
           <v-card-text>
             結果はいかがでしたでしょうか？<br><br>
-            {{this.checkee}}さんにシェアいただき、今後の恋愛に役立てていただければ幸いです😊<br>
-            <br>
-            また、こちらのモテチェッカーは3カテゴリーのみのチェックとなっております。<br>
-            より詳しく（6カテゴリーで）チェックしたい方、<br>
-            身近にチェックしてくれる人がいない方は、<br>
-            ぜひ下記のLINE公式アカウントからご連絡ください♫😊<br>
+            日々のコミュニケーションを改良改善の意識を持つか持たないかで、<br>
+            今後の恋愛・コミュニケーションに大きな差が出てきます。<br><br>
+            シェアボタンでコピーしたURLをメモしておいて、定期チェックをぜひ実施してみてください⭐<br>
+            過去の自分と比較して今の状況を精密に把握することで、ご自身のモテレベルの向上に役立てていただければ幸いです😊<br>
         </v-card-text>
           <v-card-actions class="justify-center">
             <a :href="officialLineURL"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="56" border="0"></a>
@@ -126,15 +121,15 @@ export default defineComponent({
     this.averageScores = this.categories.map((category: Category) =>
       category.questions.reduce((total: number, question: Question) => total + question.rating, 0) / category.questions.length
     )
-    this.shareURL = `${window.location.origin}/share?checker=${this.checker}&checkee=${this.checkee}&scores=${this.averageScores.join(',')}`
+    this.shareURL = `${window.location.origin}/share?checkee=${this.checkee}&scores=${this.averageScores.join(',')}`
     this.writeToSheet()
   },
   methods: {
     copyShareURL() {
-      const message = `${this.checkee}さん、こんにちは！\nチェックしてみたので確認してみてくださいね😊\n${this.shareURL}`;
+      const message = `モテレベルチェックしてみました！😊\n${this.shareURL}`;
       navigator.clipboard.writeText(message).then(() => {
         // 成功した場合の処理
-        this.$toasted.success('リンクをコピーしました！<br>' + this.checkee + 'さんに結果をシェアしましょう😊');
+        this.$toasted.success('リンクをコピーしました！<br>SNSで結果をシェアしちゃいましょう😊');
       }, () => {
         // 失敗した場合の処理
         this.$toasted.error('リンクのコピーに失敗しました。<br>再度お試しください。');

@@ -10,7 +10,10 @@
         </v-layout>
         <v-spacer size="3"></v-spacer>
         <v-layout align-center justify-center>
-          <nuxt-link :to="{ path: '/survey' }">
+          <v-text-field v-model="checkee" label="お名前"></v-text-field>
+        </v-layout>
+        <v-layout align-center justify-center>
+          <nuxt-link :to="{ path: '/survey', query: { checker, checkee } }">
             <v-btn color="primary" large dark rounded height="80">
               モテチェッカーを始める
             </v-btn>

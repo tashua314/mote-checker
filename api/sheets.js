@@ -18,7 +18,7 @@ client.authorize((err) => {
 async function writeToSheet(req, res, _next) {
   const sheets = google.sheets({ version: 'v4', auth: client });
   try {
-    const [dateTime, checker, checkee, gaikenP, comuP, hairyoP] = req.body.values;
+    const [dateTime, checker, checkee, selfP, jonetsuP, insyoP, shakoP, kaiwaP, kidukaiP] = req.body.values;
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.YOUR_SPREADSHEET_ID,
@@ -26,7 +26,7 @@ async function writeToSheet(req, res, _next) {
       valueInputOption: 'RAW',
       insertDataOption: 'INSERT_ROWS',
       requestBody: {
-        values: [[dateTime, checker, checkee, gaikenP, comuP, hairyoP]],
+        values: [[dateTime, checker, checkee, selfP, jonetsuP, insyoP, shakoP, kaiwaP, kidukaiP]],
       },
     });
 
