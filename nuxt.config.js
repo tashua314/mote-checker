@@ -30,10 +30,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/composition-api.js',
-    '~/plugins/vue-toasted.js',
-  ],
+  plugins: ['~/plugins/composition-api.js', '~/plugins/vue-toasted.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -45,7 +42,7 @@ export default {
     '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/google-gtag'
+    '@nuxtjs/google-gtag',
   ],
   'google-gtag': {
     id: 'G-Y2FV2RC5MK',
@@ -94,9 +91,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(config, { isDev, isClient }) {
+    extend(config, { _isDev, isClient }) {
       if (isClient) {
-        config.resolve.alias['store'] = '@/store'
+        config.resolve.alias.store = '@/store'
       }
     },
   },
@@ -105,7 +102,12 @@ export default {
       google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
         responseType: 'token id_token',
-        scope: ['openid', 'profile', 'email', 'https://www.googleapis.com/auth/spreadsheets'],
+        scope: [
+          'openid',
+          'profile',
+          'email',
+          'https://www.googleapis.com/auth/spreadsheets',
+        ],
         redirectUri: 'http://localhost:3000/callback',
         endpoints: {
           authorization: 'https://accounts.google.com/o/oauth2/auth',
@@ -117,8 +119,8 @@ export default {
     redirect: {
       login: '/login',
       callback: '/callback',
-      home: '/'
-    }
+      home: '/',
+    },
   },
   publicRuntimeConfig: {
     google: {
@@ -139,7 +141,7 @@ export default {
     bodyParser.json(),
     {
       path: '/api/sheets',
-      handler: '~/api/sheets'
-    }
+      handler: '~/api/sheets',
+    },
   ],
 }

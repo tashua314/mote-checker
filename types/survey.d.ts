@@ -1,11 +1,11 @@
 export type Question = {
-  questionIndex: number;
-  text: string;
-  rating: number;
+  questionIndex: number
+  text: string
+  rating: number
 }
 
 export type Category = {
-  categoryIndex: number;
-  name: string;
-  questions: Question[];
+  categoryIndex: number
+  name: string
+  questions: Question[]
 }

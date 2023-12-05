@@ -25,7 +25,7 @@ import {
   Legend,
   PointElement,
   LineElement,
-  RadialLinearScale
+  RadialLinearScale,
 } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 ChartJS.register(
@@ -41,7 +41,41 @@ ChartJS.register(
 export default defineComponent({
   name: 'RadarChart',
   components: {
-    Radar
+    Radar,
+  },
+  props: {
+    chartData: {
+      type: Object,
+      required: true,
+    },
+    chartId: {
+      type: String,
+      default: 'radar-chart',
+    },
+    datasetIdKey: {
+      type: String,
+      default: 'label',
+    },
+    width: {
+      type: Number,
+      default: 400,
+    },
+    height: {
+      type: Number,
+      default: 400,
+    },
+    cssClasses: {
+      default: '',
+      type: String,
+    },
+    styles: {
+      type: Object,
+      default: () => {},
+    },
+    plugins: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -49,13 +83,15 @@ export default defineComponent({
         scales: {
           r: {
             max: 5, // 最大値
-            pointLabels: { // 軸ラベル
+            pointLabels: {
+              // 軸ラベル
               font: {
                 size: 15,
                 weight: 'bold',
               },
             },
-            ticks: { // 目盛り
+            ticks: {
+              // 目盛り
               display: false,
               stepSize: 1, // 目盛りの間隔
               font: {
@@ -65,78 +101,45 @@ export default defineComponent({
           },
         },
         plugins: {
-          legend: { // 凡例
+          legend: {
+            // 凡例
             labels: {
               font: {
                 size: 30,
               },
             },
           },
-          datalabels: { // データラベル
+          datalabels: {
+            // データラベル
             display: true,
             clip: true,
             color: 'black',
             font: {
               size: 20,
             },
-            formatter: (value, context) => {
+            formatter: (value, _context) => {
               return value.toFixed(1)
             },
             anchor: 'end',
             align: 'end',
             offset: 10,
-          }
+          },
         },
         responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  },
-  props: {
-    chartData: {
-      type: Object,
-      required: true
-    },
-    chartId: {
-      type: String,
-      default: 'radar-chart'
-    },
-    datasetIdKey: {
-      type: String,
-      default: 'label'
-    },
-    width: {
-      type: Number,
-      default: 400
-    },
-    height: {
-      type: Number,
-      default: 400
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object,
-      default: () => {}
-    },
-    plugins: {
-      type: Array,
-      default: () => []
+        maintainAspectRatio: false,
+      },
     }
   },
   watch: {
-    chartData: function() {
+    chartData: function () {
       // if (chartInstance) {
       //   chartInstance.destroy()
       // }
       this.renderChart()
-    }
+    },
   },
   methods: {
-    renderChart() {
-    }
-  }
+    renderChart() {},
+  },
 })
 </script>

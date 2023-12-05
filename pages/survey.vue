@@ -1,24 +1,18 @@
 <template>
   <v-container>
     <AnalysisInProgress v-if="loading" />
-    <v-form ref="form" v-else>
+    <v-form v-else ref="form">
       <v-card class="mx-auto mb-5" color="pink lighten-5">
         <v-card-title class="font-weight-bold">
-          モテレベルをチェックしよう！
+          {{ $route.query.checkee }}さんのモテレベルをチェックしよう！
         </v-card-title>
-        <v-card-subtitle>
-          {{ $route.query.checker }}さんが{{ $route.query.checkee }}さんをチェックします！<br>
-          以下の質問に答えてください😊
-        </v-card-subtitle>
-        <v-card-text>
-          <p class="mb-1">チェックする人</p>
-          <p class="headline mb-4">{{ $route.query.checker }}</p>
-          <p class="mb-1">チェックされる人</p>
-          <p class="headline mb-4">{{ $route.query.checkee }}</p>
-        </v-card-text>
+        <v-card-subtitle> 以下の質問に答えてください😊 </v-card-subtitle>
       </v-card>
       <div v-for="(category, categoryIndex) in categories" :key="categoryIndex">
-        <div v-for="(question, questionIndex) in category.questions" :key="questionIndex">
+        <div
+          v-for="(question, questionIndex) in category.questions"
+          :key="questionIndex"
+        >
           <v-row>
             <v-col cols="12">
               <p>{{ question.text }}</p>
@@ -26,10 +20,10 @@
             <v-col cols="12">
               <v-slider
                 :value="getRating(categoryIndex, questionIndex)"
-                @input="setRating(categoryIndex, questionIndex, $event)"
                 min="1"
                 max="5"
                 thumb-label="always"
+                @input="setRating(categoryIndex, questionIndex, $event)"
               ></v-slider>
             </v-col>
           </v-row>
@@ -47,25 +41,25 @@ import { Category } from '../types/survey'
 import AnalysisInProgress from '../components/AnalysisInProgress.vue'
 
 export default defineComponent({
-  name: 'survey',
+  name: 'Survey',
+  components: {
+    AnalysisInProgress,
+  },
+  data() {
+    return {
+      updateData: [] as Category[],
+      loading: false,
+    }
+  },
   head: {
     title: 'モテチェッカー - チェックする',
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: 'モテチェッカーです。お相手の方のモテレベルをチェックしてあげましょう！'
-      }
-    ]
-  },
-  components: {
-    AnalysisInProgress
-  },
-  data() {
-    return {
-      updateData: [] as Category[],
-      loading: false
-    }
+        content: 'モテチェッカーです。モテレベルをチェックしてみよう！',
+      },
+    ],
   },
   mounted: function () {
     // deepコピー
@@ -77,14 +71,22 @@ export default defineComponent({
     ...mapGetters(['getCategories']),
     categories() {
       return this.getCategories
-    }
+    },
   },
   methods: {
-    ...mapMutations(['updateMultipleRatings', 'updateChecker', 'updateCheckee']),
+    ...mapMutations([
+      'updateMultipleRatings',
+      'updateChecker',
+      'updateCheckee',
+    ]),
     getRating(categoryIndex, questionIndex) {
-      const category = this.updateData.find(item => item.categoryIndex === categoryIndex)
+      const category = this.updateData.find(
+        (item) => item.categoryIndex === categoryIndex
+      )
       if (category) {
-        const question = category.questions.find(q => q.questionIndex === questionIndex)
+        const question = category.questions.find(
+          (q) => q.questionIndex === questionIndex
+        )
         if (question) {
           return question.rating
         }
@@ -93,9 +95,13 @@ export default defineComponent({
     },
     setRating(categoryIndex, questionIndex, rating) {
       // 存在しないcategory, questionが指定されることはない
-      const category = this.updateData.find(item => item.categoryIndex === categoryIndex)
+      const category = this.updateData.find(
+        (item) => item.categoryIndex === categoryIndex
+      )
       if (category) {
-        const question = category.questions.find(q => q.questionIndex === questionIndex)
+        const question = category.questions.find(
+          (q) => q.questionIndex === questionIndex
+        )
         if (question) {
           question.rating = rating
         }
@@ -105,9 +111,9 @@ export default defineComponent({
       this.loading = true
       this.updateMultipleRatings(this.updateData)
       setTimeout(() => {
-        this.$router.push('/results'); // 3秒後にresultsページにリダイレクト
-      }, 3000);
-    }
-  }
+        this.$router.push('/results') // 3秒後にresultsページにリダイレクト
+      }, 3000)
+    },
+  },
 })
 </script>

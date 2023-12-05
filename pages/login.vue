@@ -11,14 +11,14 @@ export default {
   methods: {
     async loginWithGoogle() {
       try {
-        await this.$auth.loginWith('google');
+        await this.$auth.loginWith('google')
       } catch (error) {
-        console.error('Error logging in with Google:', error);
+        console.error('Error logging in with Google:', error)
       }
     },
     login() {
       this.$auth.loginWith('google')
-    }
-  }
+    },
+  },
 }
 </script>
