@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-card class="mx-auto mb-5" color="pink lighten-5">
+        <v-card class="mx-auto mb-5" color="blue lighten-5">
           <v-card-title class="font-weight-bold">
             {{ checkee }}さんのモテレベルをチェック結果⭐
           </v-card-title>
