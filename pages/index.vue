@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="background-image custom-padding-bottom" pt-10>
     <v-row>
       <v-col cols="12">
         <v-layout align-center justify-center>
@@ -60,5 +60,34 @@ p {
   font-style: normal;
   font-family: "Roboto", sans-serif;
   color: #424242;
+}
+.background-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: 100% auto;
+  opacity: 0.2; /* 透明度を調整 */
+}
+
+.background-image {
+  position: relative; /* 疑似要素の基準点として機能させる */
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 600px) {
+  .background-image::before {
+    background-image: url('~/assets/lovers-sp.png');
+  }
+}
+@media (min-width: 601px) {
+  .background-image::before {
+    background-image: url('~/assets/lovers.png');
+  }
+}
+.custom-padding-bottom {
+  padding-bottom: 185px;
 }
 </style>

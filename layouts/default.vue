@@ -5,6 +5,9 @@
         <nuxt-link to="/" style="color: black; text-decoration: none;">{{ title }}</nuxt-link>
       </v-toolbar-title>
       <v-spacer />
+      <v-btn icon href="https://twitter.com/tashua314" target="_blank">
+        <v-icon>mdi-twitter</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
