@@ -28,37 +28,36 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  head: {
-    title: 'Mote-Checker',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Mote-Checker'
-      }
-    ]
-  },
   data() {
     return {
       checker: '', // チェックする人
       checkee: '', // チェックされる人
     }
   },
-  methods: {
-  }
+  head: {
+    title: 'Mote-Checker',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Mote-Checker',
+      },
+    ],
+  },
+  methods: {},
 })
 </script>
 
 <style scoped>
 h1 {
   font-style: italic;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #1976d2;
 }
 
 p {
   font-style: normal;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #424242;
 }
 .background-image::before {

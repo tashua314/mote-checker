@@ -2,7 +2,9 @@
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-toolbar-title>
-        <nuxt-link to="/" style="color: black; text-decoration: none;">{{ title }}</nuxt-link>
+        <nuxt-link to="/" style="color: black; text-decoration: none">{{
+          title
+        }}</nuxt-link>
       </v-toolbar-title>
       <v-spacer />
       <v-btn icon href="https://twitter.com/tashua314" target="_blank">
@@ -16,7 +18,9 @@
     </v-main>
     <v-footer :absolute="!fixed" app>
       <v-layout justify-center>
-        <span>恋愛研究会 TechGuide LLC.&copy; {{ new Date().getFullYear() }}</span>
+        <span
+          >恋愛研究会 TechGuide LLC.&copy; {{ new Date().getFullYear() }}</span
+        >
       </v-layout>
     </v-footer>
   </v-app>
@@ -56,7 +60,7 @@ body {
 }
 header {
   font-style: italic;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
 }
 </style>

@@ -9,14 +9,10 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "dev"
-      ],
+      "runtimeArgs": ["dev"],
       "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "openOnSessionStart",
-      "outFiles": [
-        "${workspaceFolder}/.nuxt/dist/client/**/*.js"
-      ],
+      "outFiles": ["${workspaceFolder}/.nuxt/dist/client/**/*.js"]
     }
   ]
 }
