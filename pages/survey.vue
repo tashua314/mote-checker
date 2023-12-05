@@ -2,7 +2,7 @@
   <v-container>
     <AnalysisInProgress v-if="loading" />
     <v-form v-else ref="form">
-      <v-card class="mx-auto mb-5" color="pink lighten-5">
+      <v-card class="mx-auto mb-5" color="blue lighten-5">
         <v-card-title class="font-weight-bold">
           {{ $route.query.checkee }}さんのモテレベルをチェックしよう！
         </v-card-title>
