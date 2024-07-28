@@ -1,4 +1,5 @@
 # mote-checker
+モテチェッカー
 
 ## Build Setup
 
